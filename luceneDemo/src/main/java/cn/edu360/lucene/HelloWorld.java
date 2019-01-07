@@ -31,10 +31,11 @@ import java.nio.file.Paths;
 public class HelloWorld {
 
 
-    public static final String path ="D:/test/index";
+    public static final String path = "D:/test/index";
 
     /**
      * 往用lucene写入数据
+     *
      * @throws IOException
      */
     @Test
@@ -82,7 +83,7 @@ public class HelloWorld {
         //对查询条件进行解析
         Query query = parser.parse(queryStr);
 
-         //TermQuery将查询条件当成是一个固定的词
+        //TermQuery将查询条件当成是一个固定的词 （不进行拆分）
         //Query query = new TermQuery(new Term("url", "http://www.edu360.cn/a10010"));
         //在【索引】中进行查找
         TopDocs topDocs = indexSearcher.search(query, 10);
@@ -130,6 +131,7 @@ public class HelloWorld {
 
     /**
      * lucene的update比较特殊，update的代价太高，先删除，然后在插入
+     *
      * @throws IOException
      * @throws ParseException
      */
@@ -159,6 +161,7 @@ public class HelloWorld {
 
     /**
      * 可以从多个字段中查找
+     *
      * @throws IOException
      * @throws ParseException
      */
@@ -189,6 +192,7 @@ public class HelloWorld {
 
     /**
      * 查找全部的数据
+     *
      * @throws IOException
      * @throws ParseException
      */
@@ -215,6 +219,7 @@ public class HelloWorld {
 
     /**
      * 布尔查询，可以组合多个查询条件
+     *
      * @throws Exception
      */
     @Test
@@ -252,7 +257,7 @@ public class HelloWorld {
         QueryParser queryParser = new QueryParser("title", new IKAnalyzer(true));
 
         //Query query = queryParser.parse("数据");
-		Query query = queryParser.parse("title:学好 OR title:学习");
+        Query query = queryParser.parse("title:学好 OR title:学习");
         System.out.println(query);
 
         TopDocs topDocs = indexSearcher.search(query, 10);

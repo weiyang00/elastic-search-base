@@ -79,11 +79,11 @@ public class EsCRUD {
                 .setSource(
                         jsonBuilder()
                                 .startObject()
-                                    .field("username", "老赵")
-                                    .field("gender", "male")
-                                    .field("birthday", new Date())
-                                    .field("fv", 9999)
-                                    .field("message", "trying out Elasticsearch")
+                                .field("username", "老赵")
+                                .field("gender", "male")
+                                .field("birthday", new Date())
+                                .field("fv", 9999)
+                                .field("message", "trying out Elasticsearch")
                                 .endObject()
                 ).get();
 
@@ -124,9 +124,9 @@ public class EsCRUD {
         updateRequest.id("2");
         updateRequest.doc(
                 jsonBuilder()
-                    .startObject()
+                        .startObject()
                         .field("fv", 999.9)
-                    .endObject());
+                        .endObject());
         client.update(updateRequest).get();
     }
 
@@ -222,7 +222,7 @@ public class EsCRUD {
 
     /**
      * https://elasticsearch.cn/article/102
-     *
+     * <p>
      * select team, count(*) as player_count from player group by team;
      */
     @Test
@@ -260,7 +260,7 @@ public class EsCRUD {
 //        }
 
         Iterator<Terms.Bucket> teamBucketIt = terms.getBuckets().iterator();
-        while (teamBucketIt .hasNext()) {
+        while (teamBucketIt.hasNext()) {
             Terms.Bucket bucket = teamBucketIt.next();
             String team = (String) bucket.getKey();
 
@@ -279,7 +279,7 @@ public class EsCRUD {
         SearchRequestBuilder builder = client.prepareSearch("player_info").setTypes("player");
         //指定别名和分组的字段
         TermsAggregationBuilder teamAgg = AggregationBuilders.terms("team_name").field("team");
-        TermsAggregationBuilder posAgg= AggregationBuilders.terms("pos_count").field("position");
+        TermsAggregationBuilder posAgg = AggregationBuilders.terms("pos_count").field("position");
         //添加两个聚合构建器
         builder.addAggregation(teamAgg.subAggregation(posAgg));
         //执行查询
@@ -332,7 +332,7 @@ public class EsCRUD {
             //在将聚合后取最大值的内容取出来放到map中
             Map<String, Aggregation> subAggMap = teamBucket.getAggregations().getAsMap();
             //取分组后的最大值
-            InternalMax ages = (InternalMax)subAggMap.get("max_age");
+            InternalMax ages = (InternalMax) subAggMap.get("max_age");
             double max = ages.getValue();
             System.out.println(team + " " + max);
         }
@@ -361,9 +361,9 @@ public class EsCRUD {
             String team = (String) teamBucket.getKey();
             Map<String, Aggregation> subAggMap = teamBucket.getAggregations().getAsMap();
             //根据别名取出平均年龄
-            InternalAvg avgAge = (InternalAvg)subAggMap.get("avg_age");
+            InternalAvg avgAge = (InternalAvg) subAggMap.get("avg_age");
             //根据别名取出薪水总和
-            InternalSum totalSalary = (InternalSum)subAggMap.get("total_salary");
+            InternalSum totalSalary = (InternalSum) subAggMap.get("total_salary");
             double avgAgeValue = avgAge.getValue();
             double totalSalaryValue = totalSalary.getValue();
             System.out.println(team + " " + avgAgeValue + " " + totalSalaryValue);
@@ -387,7 +387,7 @@ public class EsCRUD {
         for (Terms.Bucket teamBucket : teams.getBuckets()) {
             String team = (String) teamBucket.getKey();
             Map<String, Aggregation> subAggMap = teamBucket.getAggregations().getAsMap();
-            InternalSum totalSalary = (InternalSum)subAggMap.get("total_salary");
+            InternalSum totalSalary = (InternalSum) subAggMap.get("total_salary");
             double totalSalaryValue = totalSalary.getValue();
             System.out.println(team + " " + totalSalaryValue);
         }

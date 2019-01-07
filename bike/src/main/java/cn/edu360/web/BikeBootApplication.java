@@ -15,16 +15,16 @@ import java.util.List;
 @SpringBootApplication
 public class BikeBootApplication extends WebMvcConfigurerAdapter {
 
-	@Override
-	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-		super.configureMessageConverters(converters);
-		FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
-		FastJsonConfig fastConfig = new FastJsonConfig();
-		fastConverter.setFastJsonConfig(fastConfig);
-		converters.add(fastConverter);
-	}
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        super.configureMessageConverters(converters);
+        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
+        FastJsonConfig fastConfig = new FastJsonConfig();
+        fastConverter.setFastJsonConfig(fastConfig);
+        converters.add(fastConverter);
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(BikeBootApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BikeBootApplication.class, args);
+    }
 }

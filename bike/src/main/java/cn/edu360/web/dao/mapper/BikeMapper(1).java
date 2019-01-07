@@ -9,15 +9,15 @@ import java.util.List;
 @Mapper
 public interface BikeMapper {
 
-	public Bike getById(Long id);
-	
-	public List<Bike> findAll();
+    public Bike getById(Long id);
 
-	public void save(Bike Bike);
+    public List<Bike> findAll();
 
-	public void deleteByIds(Long[] ids);
+    public void save(Bike Bike);
 
-	public void update(Bike Bike);
+    public void deleteByIds(Long[] ids);
 
-	public Bike login(Bike Bike);
+    public void update(Bike Bike);
+
+    public Bike login(Bike Bike);
 }

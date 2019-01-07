@@ -9,15 +9,15 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
 
-	public User getById(Long id);
-	
-	public List<User> findAll();
+    public User getById(Long id);
 
-	public void save(User user);
+    public List<User> findAll();
 
-	public void deleteByIds(Long[] ids);
+    public void save(User user);
 
-	public void update(User user);
+    public void deleteByIds(Long[] ids);
 
-	public User login(User user);
+    public void update(User user);
+
+    public User login(User user);
 }

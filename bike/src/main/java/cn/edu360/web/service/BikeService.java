@@ -8,15 +8,15 @@ import java.util.List;
 
 public interface BikeService {
 
-	Bike getById(Long id);
+    Bike getById(Long id);
 
-	List<Bike> findAll();
+    List<Bike> findAll();
 
-	void save(Bike bike);
+    void save(Bike bike);
 
-	void deleteByIds(Long[] ids);
+    void deleteByIds(Long[] ids);
 
-	void update(Bike Bike);
+    void update(Bike Bike);
 
-	GeoResults<Bike> findNear(double longitude, double latitude);
+    GeoResults<Bike> findNear(double longitude, double latitude);
 }

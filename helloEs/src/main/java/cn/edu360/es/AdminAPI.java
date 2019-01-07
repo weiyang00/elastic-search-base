@@ -49,9 +49,9 @@ public class AdminAPI {
                 .setSettings(
                         //参数配置器
                         Settings.builder()//指定索引分区的数量
-                        .put("index.number_of_shards", 4)
+                                .put("index.number_of_shards", 4)
                                 //指定索引副本的数量（注意：不包括本身，如果设置数据存储副本为2，实际上数据存储了3份）
-                        .put("index.number_of_replicas", 2)
+                                .put("index.number_of_replicas", 2)
                 )
                 //真正执行
                 .get();
@@ -81,6 +81,7 @@ public class AdminAPI {
      * true：默认值。动态添加字段
      * false：忽略新字段
      * strict：如果碰到陌生字段，抛出异常
+     *
      * @throws IOException
      */
     @Test
@@ -93,30 +94,30 @@ public class AdminAPI {
         //2:mappings（映射、schema）
         XContentBuilder builder = XContentFactory.jsonBuilder()
                 .startObject()
-                    .field("dynamic", "true")
-                    //设置type中的属性
-                    .startObject("properties")
-                        //id属性
-                        .startObject("num")
-                            //类型是integer
-                            .field("type", "integer")
-                            //不分词，但是建索引
-                            .field("index", "not_analyzed")
-                            //在文档中存储
-                            .field("store", "yes")
-                        .endObject()
-                        //name属性
-                        .startObject("name")
-                            //string类型
-                            .field("type", "string")
-                            //在文档中存储
-                            .field("store", "yes")
-                            //建立索引
-                            .field("index", "analyzed")
-                            //使用ik_smart进行分词
-                            .field("analyzer", "ik_smart")
-                        .endObject()
-                    .endObject()
+                .field("dynamic", "true")
+                //设置type中的属性
+                .startObject("properties")
+                //id属性
+                .startObject("num")
+                //类型是integer
+                .field("type", "integer")
+                //不分词，但是建索引
+                .field("index", "not_analyzed")
+                //在文档中存储
+                .field("store", "yes")
+                .endObject()
+                //name属性
+                .startObject("name")
+                //string类型
+                .field("type", "string")
+                //在文档中存储
+                .field("store", "yes")
+                //建立索引
+                .field("index", "analyzed")
+                //使用ik_smart进行分词
+                .field("analyzer", "ik_smart")
+                .endObject()
+                .endObject()
                 .endObject();
 
         CreateIndexRequestBuilder prepareCreate = client.admin().indices().prepareCreate("user_info");
@@ -148,6 +149,7 @@ public class AdminAPI {
      * not_analyzed，建索引不分词
      * analyzed 即分词，又建立索引
      * expected [no], [not_analyzed] or [analyzed]
+     *
      * @throws IOException
      */
 
@@ -161,43 +163,43 @@ public class AdminAPI {
         //2:mappings
         XContentBuilder builder = XContentFactory.jsonBuilder()
                 .startObject()//
-                    .field("dynamic", "true")
-                    .startObject("properties")
-                        .startObject("id")
-                            .field("type", "integer")
-                            .field("store", "yes")
-                        .endObject()
-                        .startObject("name")
-                            .field("type", "string")
-                            .field("index", "not_analyzed")
-                        .endObject()
-                        .startObject("age")
-                            .field("type", "integer")
-                        .endObject()
-                        .startObject("salary")
-                            .field("type", "integer")
-                        .endObject()
-                        .startObject("team")
-                            .field("type", "string")
-                            .field("index", "not_analyzed")
-                        .endObject()
-                        .startObject("position")
-                            .field("type", "string")
-                            .field("index", "not_analyzed")
-                        .endObject()
-                        .startObject("description")
-                            .field("type", "string")
-                            .field("store", "no")
-                            .field("index", "analyzed")
-                            .field("analyzer", "ik_smart")
-                        .endObject()
-                        .startObject("addr")
-                            .field("type", "string")
-                            .field("store", "yes")
-                            .field("index", "analyzed")
-                            .field("analyzer", "ik_smart")
-                        .endObject()
-                    .endObject()
+                .field("dynamic", "true")
+                .startObject("properties")
+                .startObject("id")
+                .field("type", "integer")
+                .field("store", "yes")
+                .endObject()
+                .startObject("name")
+                .field("type", "string")
+                .field("index", "not_analyzed")
+                .endObject()
+                .startObject("age")
+                .field("type", "integer")
+                .endObject()
+                .startObject("salary")
+                .field("type", "integer")
+                .endObject()
+                .startObject("team")
+                .field("type", "string")
+                .field("index", "not_analyzed")
+                .endObject()
+                .startObject("position")
+                .field("type", "string")
+                .field("index", "not_analyzed")
+                .endObject()
+                .startObject("description")
+                .field("type", "string")
+                .field("store", "no")
+                .field("index", "analyzed")
+                .field("analyzer", "ik_smart")
+                .endObject()
+                .startObject("addr")
+                .field("type", "string")
+                .field("store", "yes")
+                .field("index", "analyzed")
+                .field("analyzer", "ik_smart")
+                .endObject()
+                .endObject()
                 .endObject();
 
         CreateIndexRequestBuilder prepareCreate = client.admin().indices().prepareCreate("player_info");
