@@ -1,4 +1,4 @@
-package cn.edu360.es;
+package com.example.es.hadoop;
 
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
 import org.elasticsearch.client.AdminClient;

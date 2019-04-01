@@ -1,4 +1,4 @@
-package cn.edu360.es;
+package com.example.es.hadoop;
 
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.bulk.byscroll.BulkByScrollResponse;

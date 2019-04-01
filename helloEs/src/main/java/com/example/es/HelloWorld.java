@@ -1,4 +1,4 @@
-package cn.edu360.es;
+package com.example.es.hadoop;
 
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.transport.TransportClient;
@@ -19,14 +19,12 @@ public class HelloWorld {
 
             //设置集群名称
             Settings settings = Settings.builder()
-                    .put("cluster.name", "my-es")
+                    .put("cluster.name", "elasticsearch")
                     .build();
             //创建client
             TransportClient client = new PreBuiltTransportClient(settings).addTransportAddresses(
                     //用java访问ES用的端口是9300
-                    new InetSocketTransportAddress(InetAddress.getByName("192.168.100.211"), 9300),
-                    new InetSocketTransportAddress(InetAddress.getByName("192.168.100.212"), 9300),
-                    new InetSocketTransportAddress(InetAddress.getByName("192.168.100.213"), 9300));
+                    new InetSocketTransportAddress(InetAddress.getByName("47.95.3.32"), 9300));
             //搜索数据（.actionGet()方法是同步的，没有返回就等待）
             GetResponse response = client.prepareGet("news", "fulltext", "1").execute().actionGet();
             //输出结果
