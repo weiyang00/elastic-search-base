@@ -1,4 +1,4 @@
-package com.example.es.hadoop;
+package com.example.es;
 
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
 import org.elasticsearch.client.AdminClient;

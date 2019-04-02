@@ -1,4 +1,4 @@
-package com.example.es.hadoop;
+package com.example.es;
 
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.bulk.byscroll.BulkByScrollResponse;
@@ -86,9 +86,8 @@ public class EsCRUD {
                                 .field("message", "trying out Elasticsearch")
                                 .endObject()
                 ).get();
-
-
     }
+
 
     //查找一条
     @Test
@@ -116,6 +115,7 @@ public class EsCRUD {
         }
     }
 
+
     @Test
     public void testUpdate() throws Exception {
         UpdateRequest updateRequest = new UpdateRequest();
@@ -130,11 +130,13 @@ public class EsCRUD {
         client.update(updateRequest).get();
     }
 
+
     @Test
     public void testDelete() {
         DeleteResponse response = client.prepareDelete("gamelog", "users", "2").get();
         System.out.println(response);
     }
+
 
     @Test
     public void testDeleteByQuery() {
@@ -148,9 +150,8 @@ public class EsCRUD {
 
         long deleted = response.getDeleted();
         System.out.println(deleted);
-
-
     }
+
 
     //异步删除
     @Test
@@ -178,6 +179,7 @@ public class EsCRUD {
             e.printStackTrace();
         }
     }
+
 
     @Test
     public void testRange() {
@@ -219,6 +221,7 @@ public class EsCRUD {
 
 
     }
+
 
     /**
      * https://elasticsearch.cn/article/102
@@ -268,8 +271,8 @@ public class EsCRUD {
 
             System.out.println(team + " " + count);
         }
-
     }
+
 
     /**
      * select team, position, count(*) as pos_count from player group by team, position;
@@ -303,8 +306,6 @@ public class EsCRUD {
                 //打印球队，位置，人数
                 System.out.println(team + " " + pos + " " + docCount);
             }
-
-
         }
     }
 
@@ -337,6 +338,7 @@ public class EsCRUD {
             System.out.println(team + " " + max);
         }
     }
+
 
     /**
      * select team, avg(age) as avg_age, sum(salary) as total_salary from player group by team;

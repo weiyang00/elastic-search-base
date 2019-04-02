@@ -1,4 +1,4 @@
-package com.example.es.hadoop;
+package com.example.es;
 
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.transport.TransportClient;

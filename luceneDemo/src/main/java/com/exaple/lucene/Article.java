@@ -1,4 +1,4 @@
-package cn.edu360.lucene;
+package com.exaple.lucene;
 
 import org.apache.lucene.document.*;
 import org.apache.lucene.document.Field.Store;
